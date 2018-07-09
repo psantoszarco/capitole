@@ -1,0 +1,66 @@
+# HTTP Server
+server:  
+  port: ${PORT:3350}   # HTTP port
+  context-path: /auth
+
+logging:  
+  file: logs/${spring.application.name}.log
+  level:
+    com.netflix.discovery: 'OFF'
+    org.springframework.cloud: 'INFO'
+    org.springframework.web: 'INFO'
+    com.atsistemas: 'DEBUG'
+    
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1111/eureka/
+
+management:
+  security:
+    basic:
+      enabled: false
+      
+configuracion:
+  client:
+    id : prueba
+    secret : secret-prueba
+    key:
+      public: |
+        -----BEGIN PUBLIC KEY-----
+        MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4OkxcWl1GK8hVhyjIqUV
+        C8UPs59Xss6PZtkRVi7veUwdZZn1D8pc8LAooKmPmQumkWnSBdg71SrXBzRijl03
+        2v/f3y+edWZgsOH2ltS+C7/N/GywfgZdgUPvNLlr3TQ0k7xr9OaYAd9cvS5NnxX9
+        JlrFs7hWF5OyrYl6QL7CzfXxAa096NZF4VcGu+uJQ3Ux8/rhp4ZkyK8vsEiTiM4d
+        XnOe6Lfxg4gVOgRv8Zc8nQh1bnbyIDWDStom/XGu7orBvtKi9DCkVWGWCHrN0nt6
+        KdS19sAVPkk79EUkOTAUtGJgFxPl6XznQyQYHZoLTdwbaDsGdUTRuUoQHLBOT4qw
+        swIDAQAB
+        -----END PUBLIC KEY-----
+      private: |
+        -----BEGIN RSA PRIVATE KEY-----
+        MIIEogIBAAKCAQEA4OkxcWl1GK8hVhyjIqUVC8UPs59Xss6PZtkRVi7veUwdZZn1
+        D8pc8LAooKmPmQumkWnSBdg71SrXBzRijl032v/f3y+edWZgsOH2ltS+C7/N/Gyw
+        fgZdgUPvNLlr3TQ0k7xr9OaYAd9cvS5NnxX9JlrFs7hWF5OyrYl6QL7CzfXxAa09
+        6NZF4VcGu+uJQ3Ux8/rhp4ZkyK8vsEiTiM4dXnOe6Lfxg4gVOgRv8Zc8nQh1bnby
+        IDWDStom/XGu7orBvtKi9DCkVWGWCHrN0nt6KdS19sAVPkk79EUkOTAUtGJgFxPl
+        6XznQyQYHZoLTdwbaDsGdUTRuUoQHLBOT4qwswIDAQABAoIBABBwOtLlOE/DjRY0
+        JaBEnJMtpgYk4U4KVuTXfLLl307oR0XDyOuMiNp2paGIgxxWg6ghKd6PfWAJL4ox
+        Q/rPyWNSTFSNsHE4OFz1RwajKfjF3hJTB1tOr8rg4jziSIX0aNtbbDCMIhQQ9UBG
+        gBnei5AgFk8abABxJSAV6j+NMcPH0OlEOBQ4ixnA2L5+zx2LVBKtNq6JxlCf8K9P
+        A58p2DE4s7l3FsjOHtkUZEqxILlgSaZxtwRq/CSoanu1daoNF089fDzLZF3/WrS8
+        yMGvrMKij9Di51nj+RnigCxWZG4HrM6gZ5cocS+TSvpvku0Cv4W9b+EbAzVbUbQe
+        aN0WaMECgYEA+YxjfREoP/Pvxt4zlxvk1S8IQvuXhDJ9s09iRtK+vnaCTsnx+mw/
+        yAmWwEjbUmmdbO42Yq3zTry7SPZuUm8TqN9mha9HfOQgls3c8n86SMYcKoMTarsj
+        J3uqx7Jl7cn4wxM3rnFC0/bxwBOqgwsYBIGyLChUdun3ZAke8I1T9ZECgYEA5rm+
+        Z5D+HppaZWte7YoXmQ39xUWdmIWcoDoCComEBX1TfmT0xPcq0Y+ZwhfStqc7aZ/R
+        h/T78vG2KWCyRAvgoZEHqo/cKIs+LiYDpHdA2TBzQZ7tG48MsbaDYIskU1vsZrL8
+        sw6eUbhX1R0lcElNvAS7pUEiJfydpt5wEjb50AMCgYAuZ6/cgwNEGT2ecpWPZQ2B
+        ozRbGGQNnkIHxRxWZTw5ONp0glMwKU8XCMlyylmWkrNGnWmZohVbr/b303Oieqti
+        PODYvUaC7/0rbe7HXWdePxDfyu4ia9hWsEWKyx7vQB61T+6Lzt4JgqNj/4Q2yCpY
+        NDIIyhsi3dE2Vgfd3boeMQKBgCKDCCsfshNLzVe8Ts/DRzJauGnotuEYo0wIQUPo
+        O/pCO9n9KevIePwtubchryApNabgBAyNJZ66byATWbb5+9jPA9GMgUcDRQLMJuFU
+        ATw7lhHrvtXPePugLFill4JsjpjyDwCNoDrjEyhKms4H+Pu1zYezjXMXLVHHlgXz
+        eTyXAoGAZOSQ7L6VgKZA+NrUC+wTvYukG4gvfeweP3LY+jVs2nHY1z+wZTwhwZCn
+        Uoowy73E1/jTwt+C4SUTUS0Of/FwdAsWLvIC1VKFAkPqihgxEJQndA7Rnu6Kg4B/
+        S5fyX+ZxKv/GNIwg/hFpwFils+AOvmBPdHnndlsQ1FhlpmH4xuM=
+        -----END RSA PRIVATE KEY-----

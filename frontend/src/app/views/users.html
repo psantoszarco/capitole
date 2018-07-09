@@ -1,0 +1,93 @@
+<h3>{{titulo}}</h3>
+<div class="col-lg-10 col-lg-offset-1">
+    <table class="table table-striped" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage">
+        <thead>
+        <tr>
+          <th class="col-lg-2">
+            <mfDefaultSorter by="id">Id usuario</mfDefaultSorter>
+          </th>
+          <th class="col-lg-6">
+            <mfDefaultSorter by="nombre">Nombre</mfDefaultSorter>
+          </th>
+          <th class="col-lg-2">
+            <mfDefaultSorter by="activo">Activo</mfDefaultSorter>
+          </th>
+          <th class="col-lg-1"></th>
+          <th class="col-lg-1"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of mf.data">
+          <td>{{item.id}}</td>
+          <td>{{item.nombre}}</td>
+          <td><span class="glyphicon" [ngClass]="{ 'glyphicon-ok-sign iconActivo': item.activo, 'glyphicon-remove-sign iconNoActivo' : !item.activo}"></span></td>
+          <td><button class="btn btn-default" (click)="editar(item);firstModal.open();"><span class="glyphicon glyphicon-pencil"></span></button></td>
+          <td><button class="btn btn-default" (click)="borrar(item)"><span class="glyphicon glyphicon-trash"></span></button></td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+          <td colspan="4">
+            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+          </td>
+        </tr>
+        </tfoot>
+      </table>
+</div>
+<button class="btn btn-primary col-lg-offset-5" (click)="nuevo();firstModal.open();">Añadir Usuario</button>
+
+<div class="row">
+        <modal #firstModal [closeOnOutsideClick]="false">
+            <modal-header>
+                <h1>Gestión de Usuarios</h1>
+            </modal-header>
+            <modal-content class="usuarios">
+              <form #formLogin="ngForm" (ngSubmit)="onSubmit()" class="col-lg-4 col-lg-offset-4" id="form-login">
+      
+                <label>Nombre
+                    <span *ngIf="!nombre.valid && nombre.touched" class="label label-danger">El nombre no es válido</span>        
+                </label>
+                <input type="text" class="form-control"
+                    #nombre="ngModel" name="userName" [(ngModel)]="user.userName" required/>
+              <br/>
+                <div *ngIf="esNuevo">
+                  <label>Contraseña
+                          <span *ngIf="!pass.valid && pass.touched" class="label label-danger">La contraseña no es válida</span>        
+                  </label>
+                  <input type="password"  class="form-control" 
+                      #pass="ngModel" name="password" [(ngModel)]="user.password" required/>
+                  <br/>
+                </div>
+                <div *ngIf="!esNuevo">
+                  <label>Contraseña Anterior
+                    <span *ngIf="!passOld.valid && passOld.touched" class="label label-danger">La contraseña no es válida</span>        
+                  </label>
+                  <input type="password"  class="form-control" 
+                      #passOld="ngModel" name="passOld" [(ngModel)]="user.passOld" required/>
+                  <br/>
+                  <label>Contraseña Nueva
+                    <span *ngIf="!passNew.valid && passNew.touched" class="label label-danger">La contraseña no es válida</span>        
+                  </label>
+                  <input type="password"  class="form-control" 
+                      #passNew="ngModel" name="password" [(ngModel)]="user.password" required/>
+                  <br/>
+                </div>
+                <label >Repetir Contraseña
+                  <span *ngIf="!passRepeat.valid && passRepeat.touched" class="label label-danger">La contraseña no es válida</span>        
+                </label>
+                <input type="password"  class="form-control" 
+                    #passRepeat="ngModel" name="passCkeck" [(ngModel)]="user.passCkeck" required/>
+                <br/>
+
+                <input type="submit" [disabled]="!formLogin.form.valid" value="Aceptar" class="btn btn-success"/>
+                <button class="btn btn-danger" #closeBtn (click)="firstModal.close()">Cerrar</button>
+            </form>
+      
+            <br *ngIf="errMensaje"/>
+            <span *ngIf="errMensaje" style="padding-top:15px; color:red;" class="label col-lg-8 col-lg-offset-2">{{errMensaje}}</span>
+            </modal-content>
+            <modal-footer>
+                
+            </modal-footer>
+        </modal>
+      </div>

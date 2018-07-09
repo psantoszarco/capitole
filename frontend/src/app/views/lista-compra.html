@@ -1,0 +1,28 @@
+<h3>{{titulo}}</h3>
+<hr/>
+
+<form #formCestaCompra="ngForm" (ngSubmit)="onSubmit()" class="col-lg-6" id="form-usuario">
+
+    <label>Nombre
+        <span *ngIf="!nombre.valid && nombre.touched" class="label label-danger">El nombre no es válido</span>        
+    </label>
+    <input type="text" class="form-control"
+        #nombre="ngModel" name="nombre" [(ngModel)]="factura.nombre" required/>
+    
+    <label>Apellidos
+            <span *ngIf="!apellidos.valid && apellidos.touched" class="label label-danger">Los apellidos no son válidos</span>        
+    </label>
+    <input type="text" class="form-control"
+        #apellidos="ngModel" name="apellidos" [(ngModel)]="factura.apellidos" required/>    
+
+    <label>Email
+            <span *ngIf="!email.valid && email.touched" class="label label-danger">El correo electronico no es válido</span>        
+    </label>
+    <input type="email" class="form-control"
+        #email="ngModel" name="email" [(ngModel)]="factura.email" required />
+    
+    <br/>
+
+    <input type="submit" [disabled]="!formCestaCompra.form.valid" value="{{titulo}}" class="btn btn-success"/>
+
+</form>

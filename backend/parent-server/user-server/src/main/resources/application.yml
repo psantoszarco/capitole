@@ -1,0 +1,37 @@
+# HTTP Server
+server:  
+  port: ${PORT:3353}   # HTTP port
+  context-path: /gestuser
+
+logging:  
+  file: logs/${spring.application.name}.log
+  level:
+    com.netflix.discovery: 'OFF'
+    org.springframework.cloud: 'INFO'
+    org.springframework.web: 'INFO'
+    com.atsistemas: 'DEBUG'
+    
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1111/eureka/
+
+management:
+  security:
+    basic:
+      enabled: false
+      
+security:
+  oauth2:
+    resource:
+      jwt:
+        key-value: |
+          -----BEGIN PUBLIC KEY-----
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4OkxcWl1GK8hVhyjIqUV
+          C8UPs59Xss6PZtkRVi7veUwdZZn1D8pc8LAooKmPmQumkWnSBdg71SrXBzRijl03
+          2v/f3y+edWZgsOH2ltS+C7/N/GywfgZdgUPvNLlr3TQ0k7xr9OaYAd9cvS5NnxX9
+          JlrFs7hWF5OyrYl6QL7CzfXxAa096NZF4VcGu+uJQ3Ux8/rhp4ZkyK8vsEiTiM4d
+          XnOe6Lfxg4gVOgRv8Zc8nQh1bnbyIDWDStom/XGu7orBvtKi9DCkVWGWCHrN0nt6
+          KdS19sAVPkk79EUkOTAUtGJgFxPl6XznQyQYHZoLTdwbaDsGdUTRuUoQHLBOT4qw
+          swIDAQAB
+          -----END PUBLIC KEY-----

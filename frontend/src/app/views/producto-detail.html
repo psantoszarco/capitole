@@ -1,0 +1,19 @@
+<h1>{{titulo}}</h1>
+
+<div *ngIf="producto then mostrar else cargando"></div>
+
+<ng-template #mostrar>     
+    <div class="col-lg-3" *ngIf="producto.imagen">
+            <img class="producto_imagen" src="{{urlImages}}{{producto.imagen}}"/>
+    </div>
+    <div class="col-lg-9">
+        <h3>{{producto.nombre}}</h3>
+        <p><strong>{{producto.precio}} €</strong></p>
+        <p>{{producto.description}}</p>
+    </div>
+</ng-template>
+
+<ng-template #cargando>
+Cargando...
+</ng-template>
+

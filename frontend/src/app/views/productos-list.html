@@ -1,0 +1,44 @@
+<h3>{{titulo}}</h3>
+<hr/>
+<div *ngIf="productos then listado else cargando"></div>
+
+
+<ng-template #listado>
+    <div class="row">
+        <div class="col-lg-3" *ngFor="let producto of productos">
+            <div class="thumbnail">
+                <div *ngIf="producto.imagen">
+                    <img class="producto_imagen" src="{{urlImages}}{{producto.imagen}}"/>
+                </div>
+                <div *ngIf="!producto.imagen">
+                        <div class="imagen_relleno"></div>
+                </div>
+                <div class="caption">
+                    <h3>{{producto.nombre}}</h3>
+                    <p>{{producto.precio}} €</p>
+                    <div class="botones" *ngIf="confirmado != producto.id">
+                        <a [routerLink]="['/producto',producto.id]" class="btn btn-md btn-info">Ver</a>
+                        <a *ngIf="logado == true" [routerLink]="['/editar',producto.id]"  class="btn btn-md btn-warning">Editar</a>
+                        <a *ngIf="logado == true" (click)="borrarConfirm(producto.id)" class="btn btn-md btn-danger">Eliminar</a>
+                    </div>
+                    <div class="seguro" *ngIf="confirmado == producto.id && logado == true">
+                        <a (click)="borrarProducto(producto.id)" class="btn btn-md btn-success">Confirmar</a>
+                        <a (click)="cancelarConfirm()" class="btn btn-md btn-danger">Cancelar</a>
+                    </div>
+                </div>
+                <div class="caption pull-right" *ngIf="logado == true">
+                    Añadir a la cesta <input id="chk_{{producto.id}}" type="checkbox" (change)="checkCesta($event, producto.id);">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="caption pull-right" style="padding-right: 10px">
+            <a *ngIf="logado == true" id="cesta" [routerLink]="['/cesta']" [queryParams]="{ items: cestaCompra }" class="btn btn-md btn-success">Cesta de la compra</a>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #cargando>
+Cargando listado...
+</ng-template>

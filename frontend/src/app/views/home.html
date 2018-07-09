@@ -1,0 +1,11 @@
+<div class="col-lg-10 col-lg-offset-1">
+    <div class="jumbotron">
+        <h2>{{titulo}}</h2>
+        <p>Gestión de teléfonos
+        </p>
+        <p>
+            <a class="btn btn-lg btn-primary" [routerLink]="['/productos-list']">Ver Teléfonos</a>
+            <a *ngIf="logado == true" class="btn btn-lg btn-success" [routerLink]="['/producto-add']">Añadir Teléfono</a>
+        </p>
+    </div>
+</div>

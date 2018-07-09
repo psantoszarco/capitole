@@ -1,0 +1,32 @@
+ 
+server:  
+  port: ${PORT:8888}
+spring:  
+  application:
+    name: configserver
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/davidtras/cloudtestconfig
+        monitor:
+          github:
+            enabled: true
+        discovery:
+          enabled: true
+  #hace falta instalarse un rabbit para gestionar las colas de mensajes 
+  # y que esté levantado (https://www.rabbitmq.com/install-windows.html)
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+
+logging:  
+  file: logs/${spring.application.name}.log
+  level:
+    com.netflix.discovery: 'OFF'
+    org.springframework.cloud: 'DEBUG'
+    com.test: 'DEBUG'
+    

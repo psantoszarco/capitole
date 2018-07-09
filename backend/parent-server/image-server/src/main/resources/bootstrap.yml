@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: images-service
+  cloud:
+    config:
+      failFast: true
+      uri: http://localhost:8888
+      
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE 
+      
+eureka:  
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1111/eureka/
+      
+ribbon:
+  http:
+    client:
+      enabled: true
+      
+url:
+  uploader:
+    folder: /temporales/img/

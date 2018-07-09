@@ -1,0 +1,54 @@
+spring:
+  application:
+    name: login-service
+  cloud:
+    config:
+      failFast: true
+      uri: http://localhost:8888
+  datasource:
+    url: jdbc:mysql://localhost:3306/adidas
+    username: root
+    password: root
+    driverClassName: com.mysql.jdbc.Driver
+    type: org.apache.tomcat.jdbc.pool.DataSource
+  tomcat:
+    max-wait: 20000
+    max-active: 50
+    max-idle: 20
+    min-idle: 15
+    test-on-borrow: true
+    validationQuery: SELECT 1
+    validationQueryTimeout: 60
+    removeAbandonedTimeout: 120
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        id.new_generator_mappings :  false
+        format_sql :  true
+        current_session_context_class: org.springframework.orm.hibernate4.SpringSessionContext
+        naming-strategy: org.hibernate.cfg.EJB3NamingStrategy
+    showSql: false
+    hibernate.ddl-auto: update
+    generate-ddl: true
+  
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE 
+            
+eureka:  
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:1111/eureka/
+      
+ribbon:
+  http:
+    client:
+      enabled: true

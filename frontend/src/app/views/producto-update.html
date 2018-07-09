@@ -1,0 +1,42 @@
+<h3>{{titulo}}</h3>
+<hr/>
+
+<form *ngIf="producto" #formProducto="ngForm" (ngSubmit)="onSubmit()" class="col-lg-6" id="form-producto">
+
+    <label>Nombre
+        <span *ngIf="!nombre.valid && nombre.touched" class="label label-danger">El nombre no es válido</span>        
+    </label>
+    <input type="text" class="form-control"
+        #nombre="ngModel" name="nombre" [(ngModel)]="producto.nombre" required/>
+    
+    <label>Descripcion
+            <span *ngIf="!description.valid && description.touched" class="label label-danger">La descripción no es válida</span>        
+    </label>
+    <textarea class="form-control" 
+        #description="ngModel" name="description" [(ngModel)]="producto.description" required>
+    </textarea>
+
+    <label>Precio
+            <span *ngIf="!precio.valid && precio.touched" class="label label-danger">El precio no es válido</span>        
+    </label>
+    <input type="text" class="form-control"
+        #precio="ngModel" name="precio" [(ngModel)]="producto.precio" required pattern="[0-9]+"/>
+
+    <label>Imagen</label>
+    <input type="file" #uploader class="form-control" (change)="fileChangeEvent($event)"/>
+    <br/>
+    <input type="submit" [disabled]="!formProducto.form.valid" value="Guardar" class="btn btn-success"/>
+    <button type="button" class="btn btn-info" (click)="restaurar()">Restaurar</button>
+    <button type="button" (click)="borrarProducto(producto.id)" class="btn btn-md btn-danger">Eliminar</button>
+</form>
+<div class="col-lg-6" *ngIf="urlPreview">
+    <img [src]="urlPreview" class="producto_imagen imagen_preview"/>
+    <br/>
+    <button  (click)="limpiarImagen()" class="btn btn-danger btn-sm center-block">Eliminar Imagen</button>    
+</div>
+<div class="col-lg-6" *ngIf="!urlPreview && producto && producto.imagen">
+    <img class="producto_imagen imagen_preview" src="{{urlImages}}{{producto.imagen}}"/>
+    <br/>
+    <button (click)="limpiarImagen()" class="btn btn-danger btn-sm center-block">Eliminar Imagen</button> 
+</div>
+

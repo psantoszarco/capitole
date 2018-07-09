@@ -1,0 +1,23 @@
+Este proyecto consta de los siguientes microservicios:
+* parent-server: proyecto raiz
+	* config-server: servidor spring-cloud que recupera las propiedades de configuración de cada uno de los microservicios
+	* eureka-server: servidor en el que se publican todos los microservicios, hace el balanceo, es necesario tener instalado un gestor de colas, yo he usado rabbitMq
+	* zuul-server: servidor que actua como proxy para centralizar las llamadas y enviarlas al microservicio que corresponda
+	* login-server: es el microservicio encargado de la gestión de los tokens, se ha utilizado oauth2 con jwt y este servidor actúa como AuthServer
+	* productos-server: es un ResourceServer que se encarga de la gestión de los productos
+	* user-server: es un ResourceServer que se encarga de la gestión de los usuarios
+	* image-server: es un ResourceServer que se encarga de la gestión de las imagenes
+	
+
+La base de datos que se ha usado es MySql, el script de generación de las tablas está en parent-server/src/db/bbdd.sql
+
+
+despues de hacer un clean instal de los proyectos, para levantar los microservicios se puede realizar mediante una tarea java o mediante maven
+mvn clean spring-boot:run , si queremos modificar los puertos que traen por defecto mvn clean spring-boot:run -DPORT=XXXX 
+, con esto podemos levantar 2 instancias del mismo microservicio en distintos puertos y eureka se encargará de realizar el balanceo.
+
+Se ha usado Swagger para documentar cada uno de los microservicios.
+Esta es la url para acceder a la documentacion:
+http://localhost:3333/swagger-ui.html
+Existen algunos metodos que no están accesibles porque hace falta autenticarse.
+

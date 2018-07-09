@@ -1,0 +1,21 @@
+ 
+server:  
+  port: ${PORT:1111}
+spring:  
+  thymeleaf:
+    enabled: false
+
+logging:  
+  file: logs/${spring.application.name}.log
+  level:
+    com.netflix.discovery: 'OFF'
+    org.springframework.cloud: 'DEBUG'
+    org.springframework.web: 'INFO'
+    com.project.multi: 'DEBUG'
+    
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: false
+    fetchRegistry: false

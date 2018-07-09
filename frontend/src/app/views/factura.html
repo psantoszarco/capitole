@@ -1,0 +1,30 @@
+<div class="col-lg-10 col-lg-offset-1">
+    <div class="jumbotron">
+        <h2>{{titulo}}</h2>
+        <div>Cliente:&nbsp;{{model.nombre}} </div>
+        <div>Correo Electrónico:&nbsp;{{model.email}} </div>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Teléfono</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td></td>
+                <td>Total</td>
+                <td>{{model.total}}&nbsp;€</td>
+            </tr>
+        </tfoot>
+        <tbody>
+            <tr *ngFor="let tel of model.telefonos">
+                <td>{{tel.nombre}}</td>
+                <td>{{tel.description}}</td>
+                <td>{{tel.precio}}&nbsp;€</td>
+            </tr>
+        </tbody>  
+    </table>                  
+</div>
